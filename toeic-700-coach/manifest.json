@@ -1,11 +1,11 @@
 {
-  "name": "TOEIC 700 Coach",
-  "short_name": "TOEIC 700",
-  "description": "半年從多益 400 到 700：AI 口說、單字、聽力、文法",
+  "name": "TOEIC POP! 750",
+  "short_name": "POP! 750",
+  "description": "26 週衝刺多益 750：AI 口說、單字遊戲、聽力、文法，邊玩邊學",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f7fb",
-  "theme_color": "#4f46e5",
+  "background_color": "#b9a6f7",
+  "theme_color": "#ffcd3c",
   "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

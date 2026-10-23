@@ -5,11 +5,11 @@
 // talk: { title, role, turns: [[對方台詞, [可接受的回答...], 中文提示]] }
 
 const PHASES = [
-  { id: 1, name: "打底期", weeks: "1–6", target: 500, desc: "生活與辦公室基礎字彙、基本句型、聽懂慢速對話" },
-  { id: 2, name: "擴充期", weeks: "7–12", target: 600, desc: "商務情境字彙、時態完整、Part 2 問答反應" },
-  { id: 3, name: "應用期", weeks: "13–18", target: 650, desc: "被動、子句、Part 5 詞性題、Part 3/4 抓重點" },
-  { id: 4, name: "精熟期", weeks: "19–24", target: 700, desc: "進階文法、長篇閱讀速度、易混淆字" },
-  { id: 5, name: "衝刺期", weeks: "25–26", target: 700, desc: "全範圍複習、模擬考、錯題重練" }
+  { id: 1, name: "暖身期", en: "WARM UP", weeks: "1–6", target: 500, color: "yellow", desc: "辦公室、電話、餐廳的生活字彙，先把基本句型說順" },
+  { id: 2, name: "升級期", en: "LEVEL UP", weeks: "7–12", target: 600, color: "pink", desc: "會議、Email、面試情境，時態一次搞懂，Part 2 反應變快" },
+  { id: 3, name: "實戰期", en: "ACTION", weeks: "13–18", target: 680, color: "blue", desc: "行銷、財務、合約，被動與子句，Part 5 詞性題穩穩拿分" },
+  { id: 4, name: "英雄期", en: "HERO", weeks: "19–24", target: 750, color: "green", desc: "IT、保險、財經新聞，進階文法和易混淆字全攻略" },
+  { id: 5, name: "決戰期", en: "FINAL", weeks: "25–26", target: 750, color: "coral", desc: "全範圍複習、模擬考、錯題重練，帥氣上場" }
 ];
 
 const WEEKS = [
@@ -840,11 +840,25 @@ WEEKS.push(
   { w: 26, phase: 5, theme: "模擬考週：聽讀全面衝刺", grammar: "考前策略", tip: "考前一週：維持作息、每天一回模擬、只複習錯題本，不再學新東西。", words: [], p5: [], p2: [], talk: null, review: true }
 );
 
-// 每日學習菜單（約 45–60 分鐘）
+// 每日任務：完成 1 項就算今日達標，其餘是加分
 const DAILY_PLAN = [
   { key: "vocab", icon: "🃏", name: "單字複習", min: 15, desc: "間隔重複記憶，每天新字 10 個" },
   { key: "speak", icon: "🎙️", name: "AI 口說對練", min: 10, desc: "角色扮演，對著麥克風說" },
   { key: "listen", icon: "🎧", name: "聽力 Part 2", min: 10, desc: "聽問句選最佳回應" },
   { key: "grammar", icon: "✏️", name: "文法 Part 5", min: 10, desc: "本週文法題＋解析" },
   { key: "shadow", icon: "🔁", name: "跟讀練習", min: 10, desc: "聽例句、模仿發音、評分" }
+];
+
+// 遊戲：每日猜字（5 個字母的多益常見字）
+const WORDLE_WORDS = [
+  "ORDER|訂單；訂購", "STAFF|員工", "SALES|銷售", "AGENT|代理人", "BOARD|董事會", "BRAND|品牌", "CLAIM|索賠；聲稱",
+  "DRAFT|草稿", "EVENT|活動", "OFFER|提供；報價", "QUOTE|報價", "LEASE|租約", "LOBBY|大廳", "AUDIT|查帳",
+  "BADGE|識別證", "BONUS|獎金", "BOOTH|攤位", "CHART|圖表", "CLERK|職員", "DELAY|延誤", "DEPOT|倉庫",
+  "FIELD|領域", "FLOOR|樓層", "GOODS|貨物", "GUEST|客人", "GUIDE|指南", "HOTEL|飯店", "ISSUE|問題；發行",
+  "LABEL|標籤", "LUNCH|午餐", "MERGE|合併", "MODEL|型號", "PANEL|小組；面板", "PRICE|價格", "PRINT|列印",
+  "PRIZE|獎品", "PROOF|證明", "RAISE|加薪；提高", "RENEW|續約", "REPLY|回覆", "ROUTE|路線", "SCALE|規模",
+  "SHARE|股份；分享", "SHELF|架子", "SHIFT|輪班", "SKILL|技能", "SPACE|空間", "SPEND|花費", "STOCK|庫存；股票",
+  "STORE|商店", "SUITE|套房", "TERMS|條款", "TOTAL|總計", "TRACK|追蹤", "TRADE|貿易", "TRAIN|培訓",
+  "TRUCK|卡車", "TRUST|信任", "VALID|有效的", "VALUE|價值", "VENUE|場地", "VISIT|拜訪", "WAGES|工資",
+  "WASTE|廢棄物", "WORTH|值得的", "YIELD|產量", "CHAIR|主持；椅子", "COVER|涵蓋", "ENTRY|入口；參賽", "INPUT|意見；投入"
 ];

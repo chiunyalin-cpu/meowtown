@@ -3,27 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TOEIC 700 Coach</title>
-<meta name="description" content="半年從多益 400 到 700 的 AI 口說＋單字＋聽力＋文法學習 App">
-<meta name="theme-color" content="#4f46e5">
+<title>TOEIC POP! 750</title>
+<meta name="description" content="26 週衝刺多益 750：AI 口說、單字遊戲、聽力、文法，邊玩邊學">
+<meta name="theme-color" content="#ffcd3c">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><span class="logo">7</span> TOEIC 700 Coach</div>
-  <div class="streak" id="streak">🔥 0</div>
+  <div class="brand" id="home"><span class="pop">POP!</span> TOEIC 750</div>
+  <div class="chips"><span class="chip" id="streak">🔥 0</span><span class="chip" id="lv">Lv.1</span></div>
 </header>
 <main id="view"></main>
 <nav class="tabbar" id="tabbar">
-  <button data-tab="today" class="on"><span>🏠</span>今日</button>
+  <button data-tab="today" class="on"><span>🏠</span>首頁</button>
   <button data-tab="course"><span>🗺️</span>課程</button>
+  <button data-tab="games"><span>🎮</span>遊戲</button>
   <button data-tab="speak"><span>🎙️</span>口說</button>
-  <button data-tab="vocab"><span>🃏</span>單字</button>
-  <button data-tab="me"><span>👤</span>我的</button>
+  <button data-tab="me"><span>😎</span>我的</button>
 </nav>
 <div id="toast" class="toast"></div>
 <script src="data.js"></script>
