@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TOEIC 700 Coach</title>
+<meta name="description" content="半年從多益 400 到 700 的 AI 口說＋單字＋聽力＋文法學習 App">
+<meta name="theme-color" content="#4f46e5">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">7</span> TOEIC 700 Coach</div>
+  <div class="streak" id="streak">🔥 0</div>
+</header>
+<main id="view"></main>
+<nav class="tabbar" id="tabbar">
+  <button data-tab="today" class="on"><span>🏠</span>今日</button>
+  <button data-tab="course"><span>🗺️</span>課程</button>
+  <button data-tab="speak"><span>🎙️</span>口說</button>
+  <button data-tab="vocab"><span>🃏</span>單字</button>
+  <button data-tab="me"><span>👤</span>我的</button>
+</nav>
+<div id="toast" class="toast"></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
