@@ -1,11 +1,11 @@
 {
-  "name": "TOEIC POP! 750",
-  "short_name": "POP! 750",
-  "description": "26 週衝刺多益 750：AI 口說、單字遊戲、聽力、文法，邊玩邊學",
+  "name": "喵町英語社",
+  "short_name": "喵町英語社",
+  "description": "每天一點點，26 週衝多益 750",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#b9a6f7",
-  "theme_color": "#ffcd3c",
+  "background_color": "#f3e7cf",
+  "theme_color": "#fffaf0",
   "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

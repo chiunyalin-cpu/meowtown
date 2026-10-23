@@ -862,3 +862,23 @@ const WORDLE_WORDS = [
   "TRUCK|卡車", "TRUST|信任", "VALID|有效的", "VALUE|價值", "VENUE|場地", "VISIT|拜訪", "WAGES|工資",
   "WASTE|廢棄物", "WORTH|值得的", "YIELD|產量", "CHAIR|主持；椅子", "COVER|涵蓋", "ENTRY|入口；參賽", "INPUT|意見；投入"
 ];
+
+// 扭蛋獎品：裝備（頭部／背部／鏡片）、稱號、貼紙
+const ITEMS = [
+  { id: "hat_sailor", slot: "head", name: "水手帽", rar: "r", desc: "藍白條紋，戴上帥一倍" },
+  { id: "hat_beret", slot: "head", name: "紅色貝雷帽", rar: "r", desc: "文青社員必備" },
+  { id: "hat_crown", slot: "head", name: "社長皇冠", rar: "ssr", desc: "只有傳說社員才戴得到" },
+  { id: "back_cape", slot: "back", name: "英雄披風", rar: "sr", desc: "隨風飄揚的紅色披風" },
+  { id: "back_rocket", slot: "back", name: "火箭背包", rar: "sr", desc: "噴射前進 750 分！" },
+  { id: "lens_pink", slot: "lens", name: "粉紅鏡片", rar: "r", desc: "看什麼都很可愛" },
+  { id: "lens_gold", slot: "lens", name: "黃金鏡片", rar: "ssr", desc: "閃閃發亮的傳說裝備" },
+  { id: "ttl_night", slot: "title", name: "夜貓社員", rar: "n", desc: "稱號：顯示在你的名字旁" },
+  { id: "ttl_word", slot: "title", name: "單字獵人", rar: "r", desc: "稱號：顯示在你的名字旁" },
+  { id: "ttl_hero", slot: "title", name: "喵町英雄", rar: "sr", desc: "稱號：顯示在你的名字旁" },
+  { id: "ttl_legend", slot: "title", name: "傳說社員", rar: "ssr", desc: "稱號：顯示在你的名字旁" },
+  { id: "st_pow", slot: "sticker", name: "POW! 貼紙", rar: "n", desc: "貼紙：收進貼紙簿" },
+  { id: "st_meow", slot: "sticker", name: "MEOW 貼紙", rar: "n", desc: "貼紙：收進貼紙簿" },
+  { id: "st_star", slot: "sticker", name: "星星貼紙", rar: "n", desc: "貼紙：收進貼紙簿" },
+  { id: "st_750", slot: "sticker", name: "750 貼紙", rar: "r", desc: "貼紙：收進貼紙簿" }
+];
+const RARITY_WEIGHT = { n: 50, r: 32, sr: 14, ssr: 4 };

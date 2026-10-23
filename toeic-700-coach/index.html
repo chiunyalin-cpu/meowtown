@@ -3,33 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TOEIC POP! 750</title>
-<meta name="description" content="26 週衝刺多益 750：AI 口說、單字遊戲、聽力、文法，邊玩邊學">
-<meta name="theme-color" content="#ffcd3c">
+<title>喵町英語社</title>
+<meta name="description" content="喵町英語社：每天一點點，26 週衝多益 750。AI 口說、單字遊戲、扭蛋換裝，邊玩邊學。">
+<meta name="theme-color" content="#fffaf0">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@700;900&family=Dela+Gothic+One&family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
-<header class="topbar">
-  <div class="brand" id="home"><span class="pop">POP!</span> TOEIC 750</div>
-  <div class="chips"><span class="chip" id="streak">🔥 0</span><span class="chip" id="lv">Lv.1</span></div>
-</header>
-<main id="view"></main>
-<nav class="tabbar" id="tabbar">
-  <button data-tab="today" class="on"><span>🏠</span>首頁</button>
-  <button data-tab="course"><span>🗺️</span>課程</button>
-  <button data-tab="games"><span>🎮</span>遊戲</button>
-  <button data-tab="speak"><span>🎙️</span>口說</button>
-  <button data-tab="me"><span>😎</span>我的</button>
-</nav>
-<div id="toast" class="toast"></div>
-<script src="data.js"></script>
-<script src="app.js"></script>
+<div class="app">
+  <header class="hud">
+    <div id="hudWrap" hidden style="display:contents">
+      <button class="me" id="meBtn" aria-label="我的社員證">
+        <span class="avatar" id="avatar"></span>
+        <span><span class="name" id="hudName"></span><span class="lv"><span class="t-label" id="hudLv">LV.1</span><span class="bar"><i id="xpbar"></i></span></span></span>
+      </button>
+      <div class="logo" id="logoBtn">喵町英語社</div>
+      <div class="wallet">
+        <span class="pill" title="連勝天數"><span class="ico" id="flame"></span><span class="t-num" id="streakNum">0</span></span>
+        <span class="pill" id="canPill" title="罐罐"><span class="ico" id="canIco"></span><span class="t-num" id="coins">0</span><button class="add" id="addBtn" aria-label="賺罐罐"></button></span>
+        <button class="icon-btn" id="gearBtn" aria-label="設定"></button>
+      </div>
+    </div>
+  </header>
+  <nav class="rail" id="rail" aria-label="主選單"></nav>
+  <main class="view" id="view"></main>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="主選單"></nav>
+<div class="modal" id="modal"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// 雲端同步的預設狀態（firebase.js 載入後會補上登入功能）
+window.Cloud = { enabled: false, user: null, fns: [], on(f) { this.fns.push(f); }, emit() { this.fns.forEach(f => f(this.user)); } };
+</script>
+<script src="firebase-config.js?v=7"></script>
+<script src="data.js?v=7"></script>
+<script src="icons.js?v=7"></script>
+<script src="mascot.js?v=7"></script>
+<script src="app.js?v=7"></script>
+<script type="module" src="firebase.js?v=7"></script>
 </body>
 </html>
