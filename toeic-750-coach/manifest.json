@@ -1,0 +1,11 @@
+{
+  "name": "喵町英語社",
+  "short_name": "喵町英語社",
+  "description": "每天一點點，26 週衝多益 750",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3e7cf",
+  "theme_color": "#fffaf0",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
