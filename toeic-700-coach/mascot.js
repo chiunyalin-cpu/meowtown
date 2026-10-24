@@ -32,9 +32,41 @@
 
   const HEAD = "M120 30 C170 30 200 58 200 96 C200 106 206 112 212 116 L200 121 C194 147 162 160 120 160 C78 160 46 147 40 121 L28 116 C34 112 40 106 40 96 C40 58 70 30 120 30 Z";
 
+  // 裝備圖：data.js 的 ITEMS 用 art 欄位指定「形狀:顏色」，例如 "cap:#2f62c9"
+  const artOf = id => (id && typeof ITEMS !== "undefined" && (ITEMS.find(i => i.id === id) || {}).art) || "";
+  const dot = (x, y, r, f, sw = 3) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${f}" stroke="${INK}" stroke-width="${sw}"/>`;
+  const mirror = svg => svg + `<g transform="translate(240 0) scale(-1 1)">${svg}</g>`;
+  const HATS = {
+    sailor: (c = BLUE) => `<g transform="rotate(-10 120 30)">${path("M84 34 Q120 -6 156 34 Z", W)}${path("M84 26 h72 v8 h-72 Z", c, 3)}${path("M74 36 Q120 24 166 36 Q120 46 74 36 Z", W)}</g>`,
+    crown: (c = Y) => path("M88 34 L92 6 L108 22 L120 0 L132 22 L148 6 L152 34 Z", c) + dot(120, 24, 4, RED, 2) + `<circle cx="102" cy="28" r="3" fill="${LENS}"/><circle cx="138" cy="28" r="3" fill="${LENS}"/>`,
+    beret: (c = RED) => `<g transform="rotate(-12 120 30)">${path("M76 32 Q78 8 120 8 Q162 8 160 32 Q120 42 76 32 Z", c)}${line("M120 8 v-8", 5)}</g>`,
+    cap: c => path("M80 38 Q80 2 120 2 Q160 2 160 38 Q120 30 80 38 Z", c) + path("M154 33 Q186 28 196 42 Q170 47 152 40 Z", c) + line("M120 4 Q110 18 108 34", 2.5) + dot(120, 3, 5, c),
+    party: c => `<g transform="rotate(14 120 30)">${path("M98 36 L120 -26 L142 36 Z", c)}${line("M107 12 L134 20 M113 -6 L128 -1", 3.5, W)}${dot(120, -28, 7, Y)}</g>`,
+    wizard: c => path("M66 36 Q120 20 174 36 Q120 50 66 36 Z", c) + path("M90 32 Q104 -10 140 -34 Q132 0 150 32 Z", c) + path("M88 26 Q120 34 152 26 L150 34 Q120 40 90 34 Z", Y, 3) + `<path d="M120 2 l3 6 6.5 .8 -4.8 4.4 1.3 6.4 -6 -3.2 -6 3.2 1.3 -6.4 -4.8 -4.4 6.5 -.8 Z" fill="${Y}" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`,
+    chef: () => path("M86 24 Q72 -6 98 -6 Q104 -24 122 -14 Q140 -26 148 -4 Q172 -6 154 24 Z", W) + path("M88 18 h64 v18 h-64 Z", W),
+    top: c => path("M94 33 V-8 H146 V33 Z", c) + path("M94 18 H146 V30 H94 Z", RED, 3) + path("M76 36 Q120 26 164 36 Q120 46 76 36 Z", c),
+    beanie: (c, c2 = W) => path("M78 40 Q76 -2 120 -2 Q164 -2 162 40 Z", c) + path("M76 28 H164 V42 H76 Z", c2, 4) + dot(120, -6, 10, c2, 4),
+    santa: () => path("M80 36 Q84 -4 124 -4 Q160 -2 178 28 L168 34 Q154 14 150 36 Z", RED) + path("M74 28 H162 V42 H74 Z", W, 4) + dot(176, 32, 9, W, 4),
+    bow: c => path("M154 30 L132 14 Q126 30 132 46 Z", c, 4) + path("M154 30 L176 14 Q182 30 176 46 Z", c, 4) + dot(154, 30, 6, c),
+    flower: c => [0, 72, 144, 216, 288].map(a => dot(152 + 10 * Math.cos(a * Math.PI / 180), 30 + 10 * Math.sin(a * Math.PI / 180), 8, c)).join("") + dot(152, 30, 6, Y),
+    phones: c => line("M42 100 Q36 2 120 2 Q204 2 198 100", 13) + line("M42 100 Q36 2 120 2 Q204 2 198 100", 6, c) + path("M28 82 h20 v38 h-20 Z", c, 4) + path("M192 82 h20 v38 h-20 Z", c, 4),
+    halo: c => `<ellipse cx="120" cy="-6" rx="40" ry="10" fill="none" stroke="${INK}" stroke-width="11"/><ellipse cx="120" cy="-6" rx="40" ry="10" fill="none" stroke="${c}" stroke-width="5"/>`
+  };
+  // 背部：[畫在身體後面, 畫在身體前面]
+  const BACK = {
+    cape: (c = RED, sh = "#a8301a") => [path("M86 150 Q120 140 154 150 L180 236 Q120 250 60 236 Z", c) + `<path d="M150 152 L180 236 Q170 240 158 242 Z" fill="${sh}"/>`, ""],
+    rocket: () => [`<g class="m-flame">${path("M60 206 q8 22 16 0 Z", OR, 3)}${path("M164 206 q8 22 16 0 Z", OR, 3)}</g>` + path("M58 156 h22 v52 h-22 Z", "#d9dde6") + path("M162 156 h22 v52 h-22 Z", "#d9dde6") + path("M58 158 q11 -22 22 0 Z", RED) + path("M162 158 q11 -22 22 0 Z", RED), ""],
+    wings: c => [mirror(path("M90 166 Q50 118 18 132 Q30 146 24 160 Q42 160 44 176 Q64 172 70 188 Q84 180 92 178 Z", c) + line("M80 168 Q56 150 38 146 M78 176 Q60 168 50 166", 2.5)), ""],
+    bat: c => [mirror(path("M90 168 Q60 120 14 126 Q28 140 22 154 Q36 150 42 164 Q54 158 60 174 Q72 168 78 186 Z", c)), ""],
+    bag: c => [path("M62 150 h116 v70 q0 10 -10 10 h-96 q-10 0 -10 -10 Z", c) + path("M62 170 h116", "none", 3), line("M96 150 Q92 180 96 206", 9) + line("M96 150 Q92 180 96 206", 4, c) + line("M144 150 Q148 180 144 206", 9) + line("M144 150 Q148 180 144 206", 4, c)],
+    balloon: c => [line("M170 200 Q192 140 196 92", 2.5) + `<ellipse cx="196" cy="64" rx="22" ry="27" fill="${c}" stroke="${INK}" stroke-width="4"/>` + line("M184 52 q4 -8 12 -10", 3.5, W) + path("M192 90 h8 l-4 6 Z", c, 2.5), ""],
+    flag: c => [line("M186 238 V22", 6) + path("M186 24 H234 L224 42 L234 60 H186 Z", c, 4) + dot(186, 20, 5, Y), ""]
+  };
+
   let uid = 0;
   window.mascot = function ({ expr = "normal", pose = "idle", sticker = false, still = false, head = false, gear = {} } = {}) {
-    const lens = { lens_gold: Y, lens_pink: PINK }[gear.lens] || LENS;
+    const lens = artOf(gear.lens) || LENS, [hs, ...ha] = (artOf(gear.head) || "").split(":"), [bs, ...ba] = (artOf(gear.back) || "").split(":");
+    const backArt = BACK[bs] ? BACK[bs](...ba) : ["", ""];
     const id = "m" + (++uid);
     let s = `<defs>
       <clipPath id="${id}h"><path d="${HEAD}"/></clipPath>
@@ -44,8 +76,7 @@
     s += `<ellipse cx="120" cy="246" rx="62" ry="9" fill="${INK}" opacity=".18"/>`;
     let c = "";
     // 背部裝備（畫在身體後面）
-    if (gear.back === "back_cape") c += path("M86 150 Q120 140 154 150 L180 236 Q120 250 60 236 Z", RED) + `<path d="M150 152 L180 236 Q170 240 158 242 Z" fill="#a8301a"/>`;
-    if (gear.back === "back_rocket") c += `<g class="m-flame">${path("M60 206 q8 22 16 0 Z", OR, 3)}${path("M164 206 q8 22 16 0 Z", OR, 3)}</g>` + path("M58 156 h22 v52 h-22 Z", "#d9dde6") + path("M162 156 h22 v52 h-22 Z", "#d9dde6") + path("M58 158 q11 -22 22 0 Z", RED) + path("M162 158 q11 -22 22 0 Z", RED);
+    c += backArt[0];
     // 尾巴
     c += `<g class="m-tail">${line("M156 212 C196 214 214 184 204 158 C198 144 186 148 190 160", 17)}${line("M156 212 C196 214 214 184 204 158 C198 144 186 148 190 160", 9, W)}${line("M204 158 C198 144 186 148 190 160", 9, OR)}</g>`;
     // 腿與腳
@@ -55,6 +86,7 @@
     c += path("M86 150 Q120 138 154 150 Q170 184 162 212 Q120 224 78 212 Q70 184 86 150 Z", BLUE);
     c += `<path d="M142 148 Q168 184 160 211 Q150 215 140 216 Q158 184 142 148 Z" fill="${BLUE_S}"/>`;
     c += path("M80 200 Q120 210 160 200 L161 210 Q120 220 79 210 Z", Y, 3);
+    c += backArt[1];
     c += path("M120 162 m-14 0 a14 14 0 1 0 28 0 a14 14 0 1 0 -28 0", RED, 4);
     c += `<path d="M120 153 l3 6 6.5 .8 -4.8 4.4 1.3 6.4 -6 -3.2 -6 3.2 1.3 -6.4 -4.8 -4.4 6.5 -.8 Z" fill="${Y}" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round" transform="translate(0 2)"/>`;
     // 手臂
@@ -79,9 +111,7 @@
     c += path("M98 52 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0", lens, 5) + path("M142 52 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0", lens, 5);
     c += line("M89 46 q5 -6 12 -6", 3.5, W) + line("M133 46 q5 -6 12 -6", 3.5, W);
     // 頭部裝備
-    if (gear.head === "hat_sailor") c += `<g transform="rotate(-10 120 30)">${path("M84 34 Q120 -6 156 34 Z", W)}${path("M84 26 h72 v8 h-72 Z", BLUE, 3)}${path("M74 36 Q120 24 166 36 Q120 46 74 36 Z", W)}</g>`;
-    if (gear.head === "hat_crown") c += path("M88 34 L92 6 L108 22 L120 0 L132 22 L148 6 L152 34 Z", Y) + `<circle cx="120" cy="24" r="4" fill="${RED}" stroke="${INK}" stroke-width="2"/><circle cx="102" cy="28" r="3" fill="${LENS}"/><circle cx="138" cy="28" r="3" fill="${LENS}"/>`;
-    if (gear.head === "hat_beret") c += `<g transform="rotate(-12 120 30)">${path("M76 32 Q78 8 120 8 Q162 8 160 32 Q120 42 76 32 Z", RED)}${line("M120 8 v-8", 5)}</g>`;
+    if (HATS[hs]) c += HATS[hs](...ha);
     // 臉
     const eyes = {
       normal: `<g class="m-blink"><ellipse cx="100" cy="104" rx="9" ry="12" fill="${INK}"/><ellipse cx="140" cy="104" rx="9" ry="12" fill="${INK}"/></g><circle cx="103" cy="99" r="3.6" fill="${W}"/><circle cx="143" cy="99" r="3.6" fill="${W}"/>`,
@@ -104,6 +134,6 @@
     c += pose === "idle" ? `<g>${armLsvg}</g>` : `<g class="${pose === "wave" ? "m-wave" : ""}">${armLsvg}</g>`;
 
     s += `<g class="m-breathe"${sticker ? ` filter="url(#${id}st)"` : ""}>${c}</g>`;
-    return `<svg class="m-svg${still ? " m-still" : ""}${head ? " m-head" : ""}" viewBox="${head ? "22 4 196 168" : "0 0 240 260"}" aria-hidden="true">${s}</svg>`;
+    return `<svg class="m-svg${still ? " m-still" : ""}${head ? " m-head" : ""}" viewBox="${head ? (HATS[hs] ? "22 -38 196 210" : "22 4 196 168") : HATS[hs] ? "0 -40 240 300" : "0 0 240 260"}" aria-hidden="true">${s}</svg>`;
   };
 })();
